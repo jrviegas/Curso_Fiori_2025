@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZGW_PED_SRV" xml:lang="pt" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Pedido" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="NumeroPedido"/>
+                </Key>
+                <Property Name="NumeroPedido" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TipoPedido" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ValorPedido" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DataCriacao" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Registro hora" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="PedidoItemSet" Relationship="ZGW_PED_SRV.Pedido_X_PedidoItem" FromRole="FromRole_Pedido_X_PedidoItem" ToRole="ToRole_Pedido_X_PedidoItem"/>
+            </EntityType>
+            <EntityType Name="PedidoItem" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="NumeroPedido"/>
+                    <PropertyRef Name="NumeroItemPedido"/>
+                </Key>
+                <Property Name="NumeroPedido" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NumeroItemPedido" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Signed INT2 / int16" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Descricao" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Valor" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Quantidade" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="0" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="Pedido_X_PedidoItem" sap:content-version="1">
+                <End Type="ZGW_PED_SRV.Pedido" Multiplicity="1" Role="FromRole_Pedido_X_PedidoItem"/>
+                <End Type="ZGW_PED_SRV.PedidoItem" Multiplicity="*" Role="ToRole_Pedido_X_PedidoItem"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Pedido_X_PedidoItem">
+                        <PropertyRef Name="NumeroPedido"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Pedido_X_PedidoItem">
+                        <PropertyRef Name="NumeroPedido"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZGW_PED_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="PedidoSet" EntityType="ZGW_PED_SRV.Pedido" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="PedidoItemSet" EntityType="ZGW_PED_SRV.PedidoItem" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <AssociationSet Name="Pedido_X_PedidoItemSet" Association="ZGW_PED_SRV.Pedido_X_PedidoItem" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="PedidoSet" Role="FromRole_Pedido_X_PedidoItem"/>
+                    <End EntitySet="PedidoItemSet" Role="ToRole_Pedido_X_PedidoItem"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <atom:link rel="self" href="https://qsapmwvm1dc.nordestao.com.br:44300/sap/opu/odata/sap/ZGW_PED_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://qsapmwvm1dc.nordestao.com.br:44300/sap/opu/odata/sap/ZGW_PED_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
