@@ -1,7 +1,26 @@
 <mvc:View controllerName="zped.controller.View1"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:t="sap.ui.table"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <Button text="Hello World" press="onPress"/>
+    <Page id="idPage" title="{i18n>title}">
+
+        <Button id="idHelloWorldButton" text="Hello World" press="onHelloWorldButtonPress"/>
+
+        <t:Table id="Table1" rows="{/PedidoSet}" visibleRowCount="5" threshold="10" class="sapUiTinyMargin" selectionMode="MultiToggle">
+            <t:toolbar>
+                <OverflowToolbar asyncMode="false">
+                    <Title id="Title" text="Pedidos"></Title>
+                </OverflowToolbar>
+            </t:toolbar>
+            <t:columns>
+                <t:Column id="colPedido" width="4rem" sortProperty="Pedido">
+                    <Label text="Pedido"/>
+                    <t:template>
+                        <Text text="{Pedido}" wrapping="false"/>                        
+                    </t:template>
+                </t:Column>
+            </t:columns>
+        </t:Table>
+
     </Page>
 </mvc:View>

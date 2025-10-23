@@ -8,7 +8,7 @@ function (Controller) {
         onInit: function () {
 
         },
-        onPress: function(){
+        onHelloWorldButtonPress: function(){
             alert("Hello World !!!");
         }
     });
