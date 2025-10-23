@@ -13,12 +13,30 @@
                 </OverflowToolbar>
             </t:extension>
             <t:columns>
-                <t:Column id="idPedidoColumn" width="4rem" sortProperty="Pedido">
+                <t:Column id="idPedidoColumn" width="15rem" sortProperty="Pedido">
                     <Label id="idPedidoLabel" text="Pedido"/>
                     <t:template>
-                        <Text id="idPedidoText" text="{NumeroPedido}" wrapping="false"/>                        
+                        <Text id="idNumeroPedidoText" text="{NumeroPedido}" wrapping="false"/>                        
                     </t:template>
                 </t:Column>
+                <t:Column id="idTipoPedidoColumn" width="10rem" sortProperty="TipoPedido">
+                    <Label id="idTipoPedidoLabel" text="Tipo Pedido"/>
+                    <t:template>
+                        <Text id="idTipoPedidoText" text="{TipoPedido}" wrapping="false"/>                        
+                    </t:template>
+                </t:Column>                
+                <t:Column id="idValorPedidoColumn" width="15rem" sortProperty="ValorPedido">
+                    <Label id="idValorPedidoLabel" text="Valor Pedido"/>
+                    <t:template>
+                        <Text id="idValorPedidoText" text="{path: 'ValorPedido', formatter: '.formatter.formatCurrency'}" wrapping="false"/>                        
+                    </t:template>
+                </t:Column>
+                <t:Column id="idDataCriacaoColumn" width="10rem" sortProperty="DataCriacao">
+                    <Label id="idDataCriacaoLabel" text="Data Criação"/>
+                    <t:template>
+                        <Text id="idDataCriacaoText" text="{DataCriacao}" wrapping="false"/>                        
+                    </t:template>
+                </t:Column>                                
             </t:columns>
         </t:Table>
 
