@@ -6,17 +6,17 @@
 
         <Button id="idHelloWorldButton" text="Hello World" press="onHelloWorldButtonPress"/>
 
-        <t:Table id="Table1" rows="{/PedidoSet}" visibleRowCount="5" threshold="10" class="sapUiTinyMargin" selectionMode="MultiToggle">
-            <t:toolbar>
-                <OverflowToolbar asyncMode="false">
-                    <Title id="Title" text="Pedidos"></Title>
+        <t:Table id="idPedidoTable" rows="{/PedidoSet}" threshold="10" class="sapUiTinyMargin">
+            <t:extension>
+                <OverflowToolbar id="idPedidosOverflowToolbar">
+                    <Title id="idPedidosTitle" text="Pedidos"></Title>
                 </OverflowToolbar>
-            </t:toolbar>
+            </t:extension>
             <t:columns>
-                <t:Column id="colPedido" width="4rem" sortProperty="Pedido">
-                    <Label text="Pedido"/>
+                <t:Column id="idPedidoColumn" width="4rem" sortProperty="Pedido">
+                    <Label id="idPedidoLabel" text="Pedido"/>
                     <t:template>
-                        <Text text="{Pedido}" wrapping="false"/>                        
+                        <Text id="idPedidoText" text="{Pedido}" wrapping="false"/>                        
                     </t:template>
                 </t:Column>
             </t:columns>
