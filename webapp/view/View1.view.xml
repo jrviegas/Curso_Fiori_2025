@@ -16,7 +16,7 @@
                 <t:Column id="idPedidoColumn" width="4rem" sortProperty="Pedido">
                     <Label id="idPedidoLabel" text="Pedido"/>
                     <t:template>
-                        <Text id="idPedidoText" text="{Pedido}" wrapping="false"/>                        
+                        <Text id="idPedidoText" text="{NumeroPedido}" wrapping="false"/>                        
                     </t:template>
                 </t:Column>
             </t:columns>
