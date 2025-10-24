@@ -141,11 +141,11 @@ sap.ui.define([], function () {
                 return "None";
             }
 
-            if (fValor > 500) {
+            if (fValor > 400) {
                 return "Success";
             }
 
-            if (fValor < 500) {
+            if (fValor < 400) {
                 return "Error";
             }
 
