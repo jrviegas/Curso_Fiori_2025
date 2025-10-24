@@ -4,7 +4,7 @@
     xmlns="sap.m">
     <Page id="idPage" title="{i18n>title}">
 
-        <Button id="idHelloWorldButton" text="Hello World" icon="sap-icon://world" press="onHelloWorldButtonPress"/>
+        <Button id="idHelloWorldButton" text="Hello World" icon="sap-icon://search" press="onHelloWorldButtonPress"/>
 
         <t:Table id="idPedidoTable" rows="{/PedidoSet}" threshold="10" class="sapUiTinyMargin">
             <t:extension>
