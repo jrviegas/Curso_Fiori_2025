@@ -10,6 +10,8 @@
             <t:extension>
                 <OverflowToolbar id="idPedidosOverflowToolbar">
                     <Title id="idPedidosTitle" text="Pedidos"></Title>
+                    <ToolbarSpacer/>
+                    <Text id="idValorPedidoTotalText" text="Total: 0"/>
                 </OverflowToolbar>
             </t:extension>
             <t:columns>
@@ -30,9 +32,6 @@
                     <t:template>
                         <Text id="idValorPedidoText" text="{path: 'ValorPedido', formatter: '.formatter.formatCurrency'}" wrapping="false"/>                        
                     </t:template>
-                    <footer>
-                        <Text id="idValorPedidoFooterText" text="Total: 0"/>
-                    </footer>
                 </t:Column>
                 <t:Column id="idDataCriacaoColumn" sortProperty="DataCriacao">
                     <Label id="idDataCriacaoLabel" text="Data Criação"/>

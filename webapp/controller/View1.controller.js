@@ -10,6 +10,7 @@ sap.ui.define([
         },
         onAfterRendering: function () {
             this._autoResizePedidoColumns();
+            this._updateValorPedidoTotal();
         },
         _autoResizePedidoColumns: function () {
             var oTable = this.byId("idPedidoTable");
@@ -22,7 +23,8 @@ sap.ui.define([
                 oTable.getColumns().forEach(function (oColumn, iIndex) {
                     oTable.autoResizeColumn(iIndex);
                 });
-                this._updateValorPedidoTotal(oTable);
+
+                this._updateValorPedidoTotal();
             }.bind(this);
 
             if (this._fnPedidoRowsUpdatedHandler) {
@@ -34,29 +36,34 @@ sap.ui.define([
 
             fnResizeColumns();
         },
-        _updateValorPedidoTotal: function (oTable) {
-            var oFooterText = this.byId("idValorPedidoFooterText");
+        _updateValorPedidoTotal: function () {
+            var oTable = this.byId("idPedidoTable");
+            var oTotalText = this.byId("idValorPedidoTotalText");
 
-            if (!oFooterText) {
+            if (!oTable || !oTotalText) {
                 return;
             }
 
             var oBinding = oTable.getBinding("rows");
+            var fTotal = 0;
 
             if (!oBinding) {
-                oFooterText.setText("Total: " + this.formatter.formatCurrency(0));
+                oTotalText.setText("Total: " + this.formatter.formatCurrency(0));
                 return;
             }
 
-            var aContexts = oBinding.getContexts(0, oBinding.getLength && oBinding.getLength());
+            var aContexts = [];
+            var iLength = typeof oBinding.getLength === "function" ? oBinding.getLength() : 0;
 
-            if (!aContexts || !aContexts.length) {
-                if (oBinding.getCurrentContexts) {
-                    aContexts = oBinding.getCurrentContexts();
-                }
+            if (iLength > 0 && typeof oBinding.getContexts === "function") {
+                aContexts = oBinding.getContexts(0, iLength);
             }
 
-            var fTotal = (aContexts || []).reduce(function (fSum, oContext) {
+            if ((!aContexts || !aContexts.length) && typeof oBinding.getCurrentContexts === "function") {
+                aContexts = oBinding.getCurrentContexts();
+            }
+
+            fTotal = (aContexts || []).reduce(function (fSum, oContext) {
                 var vValor = oContext.getProperty("ValorPedido");
                 var fValor = Number(vValor);
 
@@ -70,7 +77,11 @@ sap.ui.define([
 
             var sFormattedTotal = this.formatter.formatCurrency(fTotal);
 
-            oFooterText.setText("Total: " + (sFormattedTotal || "0"));
+            if (!sFormattedTotal) {
+                sFormattedTotal = this.formatter.formatCurrency(0);
+            }
+
+            oTotalText.setText("Total: " + sFormattedTotal);
         },
         onHelloWorldButtonPress: function(){
             alert("Hello World !!!");
