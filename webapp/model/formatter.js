@@ -1,50 +1,103 @@
-sap.ui.define([
-    "sap/ui/core/format/DateFormat"
-], function (DateFormat) {
+sap.ui.define([], function () {
     "use strict";
 
-    var oDateFormat = DateFormat.getDateInstance({
-        pattern: "dd/MM/yyyy"
-    });
-
-    function resolveDate(value) {
-        if (!value) {
+    function resolveDate(vValue) {
+        if (vValue == null) {
             return null;
         }
 
-        if (value instanceof Date) {
-            return value;
+        if (vValue instanceof Date) {
+            return isNaN(vValue.getTime()) ? null : vValue;
         }
 
-        if (typeof value === "number") {
-            var oFromNumber = new Date(value);
+        if (typeof vValue === "string") {
+            var sTrimmed = vValue.trim();
+
+            if (!sTrimmed) {
+                return null;
+            }
+
+            var aMatch = /Date\(([-+]?\d+)(?:[-+]\d{4})?\)/.exec(sTrimmed);
+            if (aMatch && aMatch[1]) {
+                var iMillis = parseInt(aMatch[1], 10);
+                if (!isNaN(iMillis)) {
+                    return new Date(iMillis);
+                }
+            }
+
+            var iParsed = Date.parse(sTrimmed);
+            if (!isNaN(iParsed)) {
+                return new Date(iParsed);
+            }
+
+            return null;
+        }
+
+        if (typeof vValue === "number") {
+            var oFromNumber = new Date(vValue);
             return isNaN(oFromNumber.getTime()) ? null : oFromNumber;
+        }
+
+        if (typeof vValue === "object") {
+            if (typeof vValue.ms === "number") {
+                var oFromMs = new Date(vValue.ms);
+                return isNaN(oFromMs.getTime()) ? null : oFromMs;
+            }
+
+            if (typeof vValue.value !== "undefined") {
+                return resolveDate(vValue.value);
+            }
+
+            if (typeof vValue.valueOf === "function") {
+                var vConverted = vValue.valueOf();
+                if (vConverted !== vValue) {
+                    return resolveDate(vConverted);
+                }
+            }
+        }
+
+        return null;
+    }
+
+    function toDDMMYYYY(oDate) {
+        var iDay = oDate.getDate();
+        var iMonth = oDate.getMonth() + 1;
+        var iYear = oDate.getFullYear();
+
+        var sDay = iDay < 10 ? "0" + iDay : String(iDay);
+        var sMonth = iMonth < 10 ? "0" + iMonth : String(iMonth);
+
+        return sDay + "/" + sMonth + "/" + iYear;
+    }
+
+    function toNumber(value) {
+        if (typeof value === "number") {
+            return value;
         }
 
         if (typeof value === "string") {
             var sTrimmed = value.trim();
 
             if (!sTrimmed) {
-                return null;
+                return NaN;
             }
 
-            var aMatches = /Date\(([-+]?\d+)(?:[-+]\d{4})?\)/.exec(sTrimmed);
-            if (aMatches && aMatches[1]) {
-                var iMillis = parseInt(aMatches[1], 10);
-                var oFromMatch = new Date(iMillis);
-                return isNaN(oFromMatch.getTime()) ? null : oFromMatch;
+            var sNormalized = sTrimmed
+                .replace(/\./g, "") // remove thousands separators
+                .replace(",", ".")
+                .replace(/[^\d.-]/g, "");
+
+            return Number(sNormalized);
+        }
+
+        if (value && typeof value.valueOf === "function") {
+            var vValueOf = value.valueOf();
+            if (vValueOf !== value) {
+                return toNumber(vValueOf);
             }
-
-            var oFromString = new Date(sTrimmed);
-            return isNaN(oFromString.getTime()) ? null : oFromString;
         }
 
-        if (typeof value === "object" && typeof value.ms === "number") {
-            var oFromMsProperty = new Date(value.ms);
-            return isNaN(oFromMsProperty.getTime()) ? null : oFromMsProperty;
-        }
-
-        return null;
+        return Number(value);
     }
 
     return {
@@ -71,7 +124,32 @@ sap.ui.define([
                 return "";
             }
 
-            return oDateFormat.format(oDate);
+            try {
+                return toDDMMYYYY(oDate);
+            } catch (oError) {
+                if (typeof sap !== "undefined" && sap && sap.base && sap.base.Log) {
+                    sap.base.Log.warning("formatter.formatDate fallback for value: " + value, oError, "zped.model.formatter");
+                }
+                return "";
+            }
+        },
+
+        determineValorPedidoState: function (value) {
+            var fValor = toNumber(value);
+
+            if (!isFinite(fValor)) {
+                return "None";
+            }
+
+            if (fValor > 500) {
+                return "Success";
+            }
+
+            if (fValor < 500) {
+                return "Error";
+            }
+
+            return "Neutral";
         }
     };
 });

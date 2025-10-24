@@ -1,4 +1,4 @@
-<mvc:View controllerName="zped.controller.View1"
+﻿<mvc:View controllerName="zped.controller.View1"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns:t="sap.ui.table"
     xmlns="sap.m">
@@ -11,7 +11,7 @@
                 <OverflowToolbar id="idPedidosOverflowToolbar">
                     <Title id="idPedidosTitle" text="Pedidos"></Title>
                     <ToolbarSpacer/>
-                    <Text id="idTotalPedidoText" text="Total: 0"/>
+                    <Text id="idValorPedidoTotalText" text="Total: 0"/>
                 </OverflowToolbar>
             </t:extension>
             <t:columns>
@@ -30,11 +30,13 @@
                 <t:Column id="idValorPedidoColumn" sortProperty="ValorPedido">
                     <Label id="idValorPedidoLabel" text="Valor Pedido"/>
                     <t:template>
-                        <Text id="idValorPedidoText" text="{path: 'ValorPedido', formatter: '.formatter.formatCurrency'}" wrapping="false"/>                        
+                        <ObjectStatus id="idValorPedidoStatus"
+                            text="{path: 'ValorPedido', formatter: '.formatter.formatCurrency'}"
+                            state="{path: 'ValorPedido', formatter: '.formatter.determineValorPedidoState'}"/>
                     </t:template>
                 </t:Column>
                 <t:Column id="idDataCriacaoColumn" sortProperty="DataCriacao">
-                    <Label id="idDataCriaoLabel" text="Data Criação"/>
+                    <Label id="idDataCriacaoLabel" text="Data Pedido"/>
                     <t:template>
                         <Text id="idDataCriacaoText" text="{path: 'DataCriacao', formatter: '.formatter.formatDate'}" wrapping="false"/>                        
                     </t:template>
@@ -44,3 +46,5 @@
 
     </Page>
 </mvc:View>
+
+
