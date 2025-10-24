@@ -13,25 +13,28 @@
                 </OverflowToolbar>
             </t:extension>
             <t:columns>
-                <t:Column id="idPedidoColumn" width="15rem" sortProperty="Pedido">
+                <t:Column id="idPedidoColumn" sortProperty="Pedido">
                     <Label id="idPedidoLabel" text="Pedido"/>
                     <t:template>
                         <Text id="idNumeroPedidoText" text="{NumeroPedido}" wrapping="false"/>                        
                     </t:template>
                 </t:Column>
-                <t:Column id="idTipoPedidoColumn" width="10rem" sortProperty="TipoPedido">
+                <t:Column id="idTipoPedidoColumn" sortProperty="TipoPedido">
                     <Label id="idTipoPedidoLabel" text="Tipo Pedido"/>
                     <t:template>
                         <Text id="idTipoPedidoText" text="{TipoPedido}" wrapping="false"/>                        
                     </t:template>
                 </t:Column>                
-                <t:Column id="idValorPedidoColumn" width="15rem" sortProperty="ValorPedido">
+                <t:Column id="idValorPedidoColumn" sortProperty="ValorPedido">
                     <Label id="idValorPedidoLabel" text="Valor Pedido"/>
                     <t:template>
                         <Text id="idValorPedidoText" text="{path: 'ValorPedido', formatter: '.formatter.formatCurrency'}" wrapping="false"/>                        
                     </t:template>
+                    <footer>
+                        <Text id="idValorPedidoFooterText" text="Total: 0"/>
+                    </footer>
                 </t:Column>
-                <t:Column id="idDataCriacaoColumn" width="10rem" sortProperty="DataCriacao">
+                <t:Column id="idDataCriacaoColumn" sortProperty="DataCriacao">
                     <Label id="idDataCriacaoLabel" text="Data Criação"/>
                     <t:template>
                         <Text id="idDataCriacaoText" text="{DataCriacao}" wrapping="false"/>                        
