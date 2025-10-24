@@ -6,12 +6,10 @@
 
         <Button id="idHelloWorldButton" text="Hello World" icon="sap-icon://search" press="onHelloWorldButtonPress"/>
 
-        <t:Table id="idPedidoTable" rows="{/PedidoSet}" threshold="10" class="sapUiTinyMargin">
+        <t:Table id="idPedidoTable" rows="{/PedidoSet}" threshold="25" class="sapUiTinyMargin" visibleRowCount="20">
             <t:extension>
                 <OverflowToolbar id="idPedidosOverflowToolbar">
                     <Title id="idPedidosTitle" text="Pedidos"></Title>
-                    <ToolbarSpacer/>
-                    <Text id="idValorPedidoTotalText" text="Total: 0"/>
                 </OverflowToolbar>
             </t:extension>
             <t:columns>
@@ -46,5 +44,4 @@
 
     </Page>
 </mvc:View>
-
 
