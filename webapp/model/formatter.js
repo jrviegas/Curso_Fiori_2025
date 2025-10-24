@@ -29,12 +29,20 @@ sap.ui.define([
                 return "";
             }
 
-            var oDate = value instanceof Date ? value : new Date(value);
+            var oDate;
+            if (value instanceof Date) {
+                oDate = value;
+            } else if (typeof value === 'string') {
+                oDate = new Date(value);
+            } else {
+                return value;
+            }
+
             if (isNaN(oDate.getTime())) {
                 return value;
             }
 
-            return oDateFormat.format(oDate);
+            return oDateFormat.format(new Date(oDate));
         }
     };
 });

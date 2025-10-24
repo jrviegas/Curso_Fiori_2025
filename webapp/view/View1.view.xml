@@ -11,7 +11,7 @@
                 <OverflowToolbar id="idPedidosOverflowToolbar">
                     <Title id="idPedidosTitle" text="Pedidos"></Title>
                     <ToolbarSpacer/>
-                    <Text id="idValorPedidoTotalText" text="Total: 0"/>
+                    <Text id="idTotalPedidoText" text="Total: 0"/>
                 </OverflowToolbar>
             </t:extension>
             <t:columns>
@@ -34,7 +34,7 @@
                     </t:template>
                 </t:Column>
                 <t:Column id="idDataCriacaoColumn" sortProperty="DataCriacao">
-                    <Label id="idDataCriacaoLabel" text="Data Criação"/>
+                    <Label id="idDataCriaoLabel" text="Data Criação"/>
                     <t:template>
                         <Text id="idDataCriacaoText" text="{path: 'DataCriacao', formatter: '.formatter.formatDate'}" wrapping="false"/>                        
                     </t:template>
