@@ -1,5 +1,11 @@
-sap.ui.define([], function () {
+sap.ui.define([
+    "sap/ui/core/format/DateFormat"
+], function (DateFormat) {
     "use strict";
+
+    var oDateFormat = DateFormat.getDateInstance({
+        pattern: "dd/MM/yyyy"
+    });
 
     return {
         formatCurrency: function (value) {
@@ -16,6 +22,19 @@ sap.ui.define([], function () {
                 style: "currency",
                 currency: "BRL"
             });
+        },
+
+        formatDate: function (value) {
+            if (!value) {
+                return "";
+            }
+
+            var oDate = value instanceof Date ? value : new Date(value);
+            if (isNaN(oDate.getTime())) {
+                return value;
+            }
+
+            return oDateFormat.format(oDate);
         }
     };
 });

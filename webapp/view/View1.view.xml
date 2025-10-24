@@ -36,7 +36,7 @@
                 <t:Column id="idDataCriacaoColumn" sortProperty="DataCriacao">
                     <Label id="idDataCriacaoLabel" text="Data Criação"/>
                     <t:template>
-                        <Text id="idDataCriacaoText" text="{DataCriacao}" wrapping="false"/>                        
+                        <Text id="idDataCriacaoText" text="{path: 'DataCriacao', formatter: '.formatter.formatDate'}" wrapping="false"/>                        
                     </t:template>
                 </t:Column>                                
             </t:columns>
