@@ -82,10 +82,26 @@ sap.ui.define([], function () {
                 return NaN;
             }
 
-            var sNormalized = sTrimmed
-                .replace(/\./g, "") // remove thousands separators
-                .replace(",", ".")
-                .replace(/[^\d.-]/g, "");
+            var sNormalized = sTrimmed.replace(/\s/g, "");
+
+            sNormalized = sNormalized.replace(/[^\d.,+-]/g, "");
+
+            if (sNormalized.indexOf(",") !== -1) {
+                sNormalized = sNormalized.replace(/\./g, "").replace(",", ".");
+            } else {
+                var iFirstDot = sNormalized.indexOf(".");
+                var iLastDot = sNormalized.lastIndexOf(".");
+
+                if (iFirstDot !== -1 && iFirstDot !== iLastDot) {
+                    sNormalized = sNormalized.replace(/\./g, "");
+                }
+            }
+
+            var bIsNegative = sNormalized.charAt(0) === "-";
+            sNormalized = sNormalized.replace(/[+-]/g, "");
+            if (bIsNegative && sNormalized) {
+                sNormalized = "-" + sNormalized;
+            }
 
             return Number(sNormalized);
         }

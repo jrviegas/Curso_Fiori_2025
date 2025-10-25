@@ -6,7 +6,7 @@
 
         <Button id="idHelloWorldButton" text="Hello World" icon="sap-icon://search" press="onHelloWorldButtonPress"/>
 
-        <t:Table id="idPedidoTable" rows="{/PedidoSet}" threshold="25" class="sapUiTinyMargin" visibleRowCount="25">
+        <t:Table id="idPedidoTable" rows="{/PedidoSet}" threshold="15" class="sapUiTinyMargin" visibleRowCount="15">
             <t:extension>
                 <OverflowToolbar id="idPedidosOverflowToolbar">
                     <Title id="idPedidosTitle" text="Pedidos"></Title>
