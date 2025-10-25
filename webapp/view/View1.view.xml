@@ -6,31 +6,17 @@
 
         <Button id="idHelloWorldButton" text="Hello World" icon="sap-icon://search" press="onHelloWorldButtonPress"/>
 
-        <t:Table id="idPedidoTable" rows="{/PedidoSet}" threshold="15" class="sapUiTinyMargin" visibleRowCount="15">
+        <t:Table id="idPedidoTable" rows="{/PedidoSet}" threshold="15" class="sapUiTinyMargin" visibleRowCount="22">
             <t:extension>
                 <OverflowToolbar id="idPedidosOverflowToolbar">
                     <Title id="idPedidosTitle" text="Pedidos"></Title>
                 </OverflowToolbar>
             </t:extension>
             <t:columns>
-                <t:Column id="idPedidoColumn" sortProperty="Pedido">
+                <t:Column id="idPedidoColumn">
                     <Label id="idPedidoLabel" text="Pedido"/>
                     <t:template>
                         <Text id="idNumeroPedidoText" text="{NumeroPedido}" wrapping="false"/>                        
-                    </t:template>
-                </t:Column>
-                <t:Column id="idTipoPedidoColumn" sortProperty="TipoPedido">
-                    <Label id="idTipoPedidoLabel" text="Tipo Pedido"/>
-                    <t:template>
-                        <Text id="idTipoPedidoText" text="{TipoPedido}" wrapping="false"/>                        
-                    </t:template>
-                </t:Column>                
-                <t:Column id="idValorPedidoColumn" sortProperty="ValorPedido">
-                    <Label id="idValorPedidoLabel" text="Valor Pedido"/>
-                    <t:template>
-                        <ObjectStatus id="idValorPedidoStatus"
-                            text="{path: 'ValorPedido', formatter: '.formatter.formatCurrency'}"
-                            state="{path: 'ValorPedido', formatter: '.formatter.determineValorPedidoState'}"/>
                     </t:template>
                 </t:Column>
                 <t:Column id="idDataCriacaoColumn" sortProperty="DataCriacao">
@@ -38,7 +24,30 @@
                     <t:template>
                         <Text id="idDataCriacaoText" text="{path: 'DataCriacao', formatter: '.formatter.formatDate'}" wrapping="false"/>                        
                     </t:template>
-                </t:Column>                                
+                </t:Column>                            
+                
+                <t:Column id="idTipoPedidoColumn" sortProperty="TipoPedido">
+                    <Label id="idTipoPedidoLabel" text="Tipo Pedido"/>
+                    <t:template>
+                        <Text id="idTipoPedidoText" text="{TipoPedido}" wrapping="false"/>                        
+                    </t:template>
+                </t:Column>
+
+                <t:Column id="idClienteColumn" sortProperty="Cliente">
+                    <Label id="idClienteLabel" text="Cliente"/>
+                    <t:template>
+                        <Text id="idClienteText" text="{= ${Cliente} + ' - ' + ${Nome} }" wrapping="false"/>                        
+                    </t:template>
+                </t:Column>
+
+                <t:Column id="idValorPedidoColumn" sortProperty="ValorPedido">
+                    <Label id="idValorPedidoLabel" text="Valor Pedido"/>
+                    <t:template>
+                        <ObjectStatus id="idValorPedidoStatus"
+                            text="{path: 'ValorPedido', formatter: '.formatter.formatCurrency'}"
+                            state="{path: 'ValorPedido', formatter: '.formatter.determineValorPedidoState'}"/>
+                    </t:template>
+                </t:Column>                    
             </t:columns>
         </t:Table>
 
