@@ -83,6 +83,24 @@ sap.ui.define([
 
             oTotalText.setText("Total: " + sFormattedTotal);
         },
+        onPedidoLinkPress: function (oEvent) {
+            var oSource = oEvent.getSource();
+            var oContext = oSource && oSource.getBindingContext();
+
+            if (!oContext) {
+                return;
+            }
+
+            var sNumeroPedido = oContext.getProperty("NumeroPedido");
+
+            if (!sNumeroPedido) {
+                return;
+            }
+
+            this.getOwnerComponent().getRouter().navTo("PedidoDetalhe", {
+                NumeroPedido: sNumeroPedido
+            });
+        },
         onHelloWorldButtonPress: function(){
             alert("Hello World !!!");
         }

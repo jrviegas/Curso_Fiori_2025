@@ -6,25 +6,25 @@
 
         <!--<Button id="idHelloWorldButton" text="Hello World" icon="sap-icon://search" press="onHelloWorldButtonPress"/> -->
 
-        <t:Table id="idPedidoTable" rows="{/PedidoSet}" threshold="15" class="sapUiTinyMargin" visibleRowCount="22">
+        <t:Table id="idPedidoTable" rows="{/PedidoSet}" threshold="15" class="sapUiTinyMargin" visibleRowCount="22" selectionMode="None">
             <t:columns>
-                <t:Column id="idPedidoColumn" width="7rem">
+                <t:Column id="idPedidoColumn" width="7rem" hAlign="Center">
                     <Label id="idPedidoLabel" text="Pedido"/>
                     <t:template>
-                        <Text id="idNumeroPedidoText" text="{NumeroPedido}" textAlign="Center" wrapping="false"/>                        
+                        <Link id="idNumeroPedidoLink" text="{NumeroPedido}" press=".onPedidoLinkPress"/>                        
                     </t:template>
                 </t:Column>
-                <t:Column id="idDataCriacaoColumn" width="7rem">
+                <t:Column id="idDataCriacaoColumn" width="7rem" hAlign="Center"> 
                     <Label id="idDataCriacaoLabel" text="Data Pedido"/>
                     <t:template>
-                        <Text id="idDataCriacaoText" text="{path: 'DataCriacao', formatter: '.formatter.formatDate'}" textAlign="Center" wrapping="false"/>                        
+                        <Text id="idDataCriacaoText" text="{path: 'DataCriacao', formatter: '.formatter.formatDate'}" wrapping="false"/>                        
                     </t:template>
                 </t:Column>                            
                 
-                <t:Column id="idTipoPedidoColumn" width="7rem">
-                    <Label id="idTipoPedidoLabel" text="Tipo Pedido" textAlign="Center"/>
+                <t:Column id="idTipoPedidoColumn" width="7rem" hAlign="Center">
+                    <Label id="idTipoPedidoLabel" text="Tipo Pedido"/>
                     <t:template>
-                        <Text id="idTipoPedidoText" text="{TipoPedido}" textAlign="Center" wrapping="false"/>                        
+                        <Text id="idTipoPedidoText" text="{TipoPedido}" wrapping="false"/>                        
                     </t:template>
                 </t:Column>
 
@@ -35,7 +35,7 @@
                     </t:template>
                 </t:Column>
 
-                <t:Column id="idValorPedidoColumn" width="8rem">
+                <t:Column id="idValorPedidoColumn" width="9rem">
                     <Label id="idValorPedidoLabel" text="Valor Pedido"/>
                     <t:template>
                         <ObjectStatus id="idValorPedidoStatus"
@@ -48,4 +48,3 @@
 
     </Page>
 </mvc:View>
-

@@ -1,0 +1,59 @@
+<mvc:View controllerName="zped.controller.PedidoDetalhe"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:t="sap.ui.table"
+    xmlns="sap.m">
+    <Page id="idPedidoDetalhePage"
+        title="{i18n>pedidoItensTitle}"
+        showNavButton="true"
+        navButtonPress="onNavBack">
+        <content>
+            <ObjectHeader id="idPedidoDetalheHeader"
+                title="{= ${i18n>pedidoItensHeaderTitle} + ' ' + ${NumeroPedido}}"
+                number="{path: 'ValorPedido', formatter: '.formatter.formatCurrency'}"
+                numberUnit="{i18n>pedidoItensValorLabel}">
+                <attributes>
+                    <ObjectAttribute title="{i18n>pedidoTipoLabel}" text="{TipoPedido}"/>
+                    <ObjectAttribute title="{i18n>pedidoClienteLabel}" text="{= ${Cliente} + ' - ' + ${Nome} }"/>
+                </attributes>
+            </ObjectHeader>
+            <t:Table id="idPedidoItensTable"
+                rows="{PedidoItemSet}"
+                threshold="15"
+                visibleRowCount="12"
+                selectionMode="None">
+                <t:columns>
+                    <t:Column width="6rem" hAlign="Center">
+                        <Label text="{i18n>pedidoItensColumnNumero}"/>
+                        <t:template>
+                            <Text text="{NumeroItemPedido}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="10rem">
+                        <Label text="{i18n>pedidoItensColumnMaterial}"/>
+                        <t:template>
+                            <Text text="{Material}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column>
+                        <Label text="{i18n>pedidoItensColumnDescricao}"/>
+                        <t:template>
+                            <Text text="{Descricao}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" hAlign="End">
+                        <Label text="{i18n>pedidoItensColumnQuantidade}"/>
+                        <t:template>
+                            <Text text="{Quantidade}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" hAlign="End">
+                        <Label text="{i18n>pedidoItensColumnValor}"/>
+                        <t:template>
+                            <Text text="{path: 'Valor', formatter: '.formatter.formatCurrency'}"/>
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+        </content>
+    </Page>
+</mvc:View>
