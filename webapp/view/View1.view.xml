@@ -4,43 +4,38 @@
     xmlns="sap.m">
     <Page id="idPage" title="{i18n>title}">
 
-        <Button id="idHelloWorldButton" text="Hello World" icon="sap-icon://search" press="onHelloWorldButtonPress"/>
+        <!--<Button id="idHelloWorldButton" text="Hello World" icon="sap-icon://search" press="onHelloWorldButtonPress"/> -->
 
         <t:Table id="idPedidoTable" rows="{/PedidoSet}" threshold="15" class="sapUiTinyMargin" visibleRowCount="22">
-            <t:extension>
-                <OverflowToolbar id="idPedidosOverflowToolbar">
-                    <Title id="idPedidosTitle" text="Pedidos"></Title>
-                </OverflowToolbar>
-            </t:extension>
             <t:columns>
-                <t:Column id="idPedidoColumn">
+                <t:Column id="idPedidoColumn" width="7rem">
                     <Label id="idPedidoLabel" text="Pedido"/>
                     <t:template>
-                        <Text id="idNumeroPedidoText" text="{NumeroPedido}" wrapping="false"/>                        
+                        <Text id="idNumeroPedidoText" text="{NumeroPedido}" textAlign="Center" wrapping="false"/>                        
                     </t:template>
                 </t:Column>
-                <t:Column id="idDataCriacaoColumn" sortProperty="DataCriacao">
+                <t:Column id="idDataCriacaoColumn" width="7rem">
                     <Label id="idDataCriacaoLabel" text="Data Pedido"/>
                     <t:template>
-                        <Text id="idDataCriacaoText" text="{path: 'DataCriacao', formatter: '.formatter.formatDate'}" wrapping="false"/>                        
+                        <Text id="idDataCriacaoText" text="{path: 'DataCriacao', formatter: '.formatter.formatDate'}" textAlign="Center" wrapping="false"/>                        
                     </t:template>
                 </t:Column>                            
                 
-                <t:Column id="idTipoPedidoColumn" sortProperty="TipoPedido">
-                    <Label id="idTipoPedidoLabel" text="Tipo Pedido"/>
+                <t:Column id="idTipoPedidoColumn" width="7rem">
+                    <Label id="idTipoPedidoLabel" text="Tipo Pedido" textAlign="Center"/>
                     <t:template>
-                        <Text id="idTipoPedidoText" text="{TipoPedido}" wrapping="false"/>                        
+                        <Text id="idTipoPedidoText" text="{TipoPedido}" textAlign="Center" wrapping="false"/>                        
                     </t:template>
                 </t:Column>
 
-                <t:Column id="idClienteColumn" sortProperty="Cliente">
+                <t:Column id="idClienteColumn" width="47rem">
                     <Label id="idClienteLabel" text="Cliente"/>
                     <t:template>
                         <Text id="idClienteText" text="{= ${Cliente} + ' - ' + ${Nome} }" wrapping="false"/>                        
                     </t:template>
                 </t:Column>
 
-                <t:Column id="idValorPedidoColumn" sortProperty="ValorPedido">
+                <t:Column id="idValorPedidoColumn" width="8rem">
                     <Label id="idValorPedidoLabel" text="Valor Pedido"/>
                     <t:template>
                         <ObjectStatus id="idValorPedidoStatus"
