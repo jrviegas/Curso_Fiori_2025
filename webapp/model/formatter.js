@@ -166,6 +166,20 @@ sap.ui.define([], function () {
             }
 
             return "Neutral";
+        },
+
+        buildPedidoHash: function (value) {
+            if (value == null || value === "") {
+                return "#";
+            }
+
+            var sValue = String(value).trim();
+
+            if (!sValue) {
+                return "#";
+            }
+
+            return "#/pedido/" + encodeURIComponent(sValue);
         }
     };
 });

@@ -6,12 +6,25 @@
 
         <!--<Button id="idHelloWorldButton" text="Hello World" icon="sap-icon://search" press="onHelloWorldButtonPress"/> -->
 
-        <t:Table id="idPedidoTable" rows="{/PedidoSet}" threshold="15" class="sapUiTinyMargin" visibleRowCount="22" selectionMode="None">
+        <t:Table id="idPedidoTable"
+            rows="{/PedidoSet}"
+            threshold="15"
+            class="sapUiTinyMargin"
+            visibleRowCount="22"
+            selectionMode="None"
+            cellClick="onPedidoCellPress">
             <t:columns>
                 <t:Column id="idPedidoColumn" width="7rem" hAlign="Center">
                     <Label id="idPedidoLabel" text="Pedido"/>
                     <t:template>
-                        <Link id="idNumeroPedidoLink" text="{NumeroPedido}" press=".onPedidoLinkPress"/>                        
+                        <Link id="idNumeroPedidoLink"
+                            text="{NumeroPedido}"
+                            press="onPedidoLinkPress"
+                            wrapping="false"
+                            tooltip="{NumeroPedido}"
+                            href="{path: 'NumeroPedido', formatter: '.formatter.buildPedidoHash'}"
+                            target="_self"
+                            templateShareable="false"/>                        
                     </t:template>
                 </t:Column>
                 <t:Column id="idDataCriacaoColumn" width="7rem" hAlign="Center"> 

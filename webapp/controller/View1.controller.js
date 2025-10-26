@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
+    "sap/ui/core/UIComponent",
     "../model/formatter"
-], function (Controller, formatter) {
+], function (Controller, UIComponent, formatter) {
     "use strict";
 
     return Controller.extend("zped.controller.View1", {
@@ -87,6 +88,31 @@ sap.ui.define([
             var oSource = oEvent.getSource();
             var oContext = oSource && oSource.getBindingContext();
 
+            if (!oContext && oSource && typeof oSource.getParent === "function") {
+                var oParent = oSource.getParent();
+
+                if (oParent && typeof oParent.getBindingContext === "function") {
+                    oContext = oParent.getBindingContext();
+                }
+            }
+
+            if (!oContext) {
+                return;
+            }
+
+            this._navToPedidoDetalhe(oContext);
+        },
+        onPedidoCellPress: function (oEvent) {
+            var sColumnId = oEvent.getParameter("columnId");
+            var oContext = oEvent.getParameter("rowBindingContext");
+
+            if (!sColumnId || sColumnId.indexOf("idPedidoColumn") === -1) {
+                return;
+            }
+
+            this._navToPedidoDetalhe(oContext);
+        },
+        _navToPedidoDetalhe: function (oContext) {
             if (!oContext) {
                 return;
             }
@@ -97,8 +123,14 @@ sap.ui.define([
                 return;
             }
 
-            this.getOwnerComponent().getRouter().navTo("PedidoDetalhe", {
-                NumeroPedido: sNumeroPedido
+            var oRouter = UIComponent.getRouterFor(this);
+
+            if (!oRouter) {
+                return;
+            }
+
+            oRouter.navTo("PedidoDetalhe", {
+                NumeroPedido: encodeURIComponent(String(sNumeroPedido).trim())
             });
         },
         onHelloWorldButtonPress: function(){

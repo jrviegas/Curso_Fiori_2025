@@ -15,6 +15,14 @@ sap.ui.define([
         _onRouteMatched: function (oEvent) {
             var sNumeroPedido = oEvent.getParameter("arguments").NumeroPedido;
 
+            if (sNumeroPedido) {
+                sNumeroPedido = decodeURIComponent(sNumeroPedido);
+            }
+
+            if (sNumeroPedido) {
+                sNumeroPedido = sNumeroPedido.trim();
+            }
+
             if (!sNumeroPedido) {
                 this.getView().unbindElement();
                 this.getView().setBusy(false);
