@@ -179,7 +179,7 @@ sap.ui.define([], function () {
                 return "#";
             }
 
-            return "#/pedido/" + encodeURIComponent(sValue);
+            return "#pedido/" + encodeURIComponent(sValue);
         }
     };
 });
