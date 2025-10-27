@@ -16,24 +16,28 @@ sap.ui.define([
         _autoResizePedidoColumns: function () {
             var oTable = this.byId("idPedidoTable");
 
-            if (!oTable) {
+            if (!oTable || typeof oTable.attachRowsUpdated !== "function" || typeof oTable.getColumns !== "function") {
                 return;
             }
 
             var fnResizeColumns = function () {
-                oTable.getColumns().forEach(function (oColumn, iIndex) {
-                    oTable.autoResizeColumn(iIndex);
-                });
+                if (typeof oTable.getColumns === "function" && typeof oTable.autoResizeColumn === "function") {
+                    oTable.getColumns().forEach(function (oColumn, iIndex) {
+                        oTable.autoResizeColumn(iIndex);
+                    });
+                }
 
                 this._updateValorPedidoTotal();
             }.bind(this);
 
-            if (this._fnPedidoRowsUpdatedHandler) {
+            if (this._fnPedidoRowsUpdatedHandler && typeof oTable.detachRowsUpdated === "function") {
                 oTable.detachRowsUpdated(this._fnPedidoRowsUpdatedHandler);
             }
 
             this._fnPedidoRowsUpdatedHandler = fnResizeColumns;
-            oTable.attachRowsUpdated(this._fnPedidoRowsUpdatedHandler);
+            if (typeof oTable.attachRowsUpdated === "function") {
+                oTable.attachRowsUpdated(this._fnPedidoRowsUpdatedHandler);
+            }
 
             fnResizeColumns();
         },

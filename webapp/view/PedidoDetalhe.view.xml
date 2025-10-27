@@ -17,7 +17,7 @@
                 </attributes>
             </ObjectHeader>
             <t:Table id="idPedidoItensTable"
-                rows="{/PedidoItemSet}"
+                rows="{path: 'toPedidoItem'}"
                 threshold="15"
                 visibleRowCount="12"
                 selectionMode="None">

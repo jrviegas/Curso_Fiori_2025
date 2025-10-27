@@ -43,7 +43,7 @@ sap.ui.define([
             this.getView().bindElement({
                 path: "/" + sKey,
                 parameters: {
-                    expand: "PedidoItemSet"
+                    expand: "toPedidoItem"
                 },
                 events: {
                     dataRequested: function () {

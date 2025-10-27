@@ -22,8 +22,6 @@
                             press="onPedidoLinkPress"
                             wrapping="false"
                             tooltip="{NumeroPedido}"
-                            href="{path: 'NumeroPedido', formatter: '.formatter.buildPedidoHash'}"
-                            target="_self"
                             templateShareable="false"/>                        
                     </t:template>
                 </t:Column>
