@@ -23,8 +23,8 @@
                 <Property Name="NumeroItemPedido" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Signed INT2 / int16" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
                 <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
                 <Property Name="Descricao" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
-                <Property Name="Valor" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
                 <Property Name="Quantidade" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
+                <Property Name="Valor" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" />
             </EntityType>
             <Association Name="PedItem" sap:content-version="1">
                 <End Type="ZGW_PED_SRV.Pedido" Multiplicity="1" Role="FromRole_PedItem" />
