@@ -10,36 +10,25 @@ sap.ui.define([
         onInit: function () {
         },
         onAfterRendering: function () {
-            this._autoResizePedidoColumns();
+            this._attachPedidoTableUpdates();
             this._updateValorPedidoTotal();
         },
-        _autoResizePedidoColumns: function () {
+        _attachPedidoTableUpdates: function () {
             var oTable = this.byId("idPedidoTable");
 
-            if (!oTable || typeof oTable.attachRowsUpdated !== "function" || typeof oTable.getColumns !== "function") {
+            if (!oTable || typeof oTable.attachUpdateFinished !== "function") {
                 return;
             }
 
-            var fnResizeColumns = function () {
-                if (typeof oTable.getColumns === "function" && typeof oTable.autoResizeColumn === "function") {
-                    oTable.getColumns().forEach(function (oColumn, iIndex) {
-                        oTable.autoResizeColumn(iIndex);
-                    });
-                }
+            if (this._fnPedidoUpdateFinishedHandler && typeof oTable.detachUpdateFinished === "function") {
+                oTable.detachUpdateFinished(this._fnPedidoUpdateFinishedHandler);
+            }
 
+            this._fnPedidoUpdateFinishedHandler = function () {
                 this._updateValorPedidoTotal();
             }.bind(this);
 
-            if (this._fnPedidoRowsUpdatedHandler && typeof oTable.detachRowsUpdated === "function") {
-                oTable.detachRowsUpdated(this._fnPedidoRowsUpdatedHandler);
-            }
-
-            this._fnPedidoRowsUpdatedHandler = fnResizeColumns;
-            if (typeof oTable.attachRowsUpdated === "function") {
-                oTable.attachRowsUpdated(this._fnPedidoRowsUpdatedHandler);
-            }
-
-            fnResizeColumns();
+            oTable.attachUpdateFinished(this._fnPedidoUpdateFinishedHandler);
         },
         _updateValorPedidoTotal: function () {
             var oTable = this.byId("idPedidoTable");
@@ -49,7 +38,7 @@ sap.ui.define([
                 return;
             }
 
-            var oBinding = oTable.getBinding("rows");
+            var oBinding = oTable.getBinding("items");
             var fTotal = 0;
 
             if (!oBinding) {
@@ -106,14 +95,9 @@ sap.ui.define([
 
             this._navToPedidoDetalhe(oContext);
         },
-        onPedidoCellPress: function (oEvent) {
-            var sColumnId = oEvent.getParameter("columnId");
-            var oContext = oEvent.getParameter("rowBindingContext");
-
-            if (!sColumnId || sColumnId.indexOf("idPedidoColumn") === -1) {
-                return;
-            }
-
+        onPedidoItemPress: function (oEvent) {
+            var oItem = oEvent.getParameter("listItem");
+            var oContext = oItem && typeof oItem.getBindingContext === "function" ? oItem.getBindingContext() : null;
             this._navToPedidoDetalhe(oContext);
         },
         _navToPedidoDetalhe: function (oContext) {
