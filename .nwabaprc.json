@@ -1,0 +1,12 @@
+{
+"base" : "/dist",
+"conn_usestrictssl" : false,
+"conn_server" : "myserver.sap.com",
+"conn_client" : "100",
+"conn_user" : "I0001",
+"conn_password" : "YAGO2019",
+"abap_package" : "ZPED",
+"abap_bsp" : "ZPED_APPLICATION",
+"abap_bsp_text" : "Documento de Vendas - Fiori",
+"abap_language" : "PT"
+}
